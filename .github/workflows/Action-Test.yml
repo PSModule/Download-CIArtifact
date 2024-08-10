@@ -24,5 +24,6 @@ jobs:
       - name: Action-Test
         uses: ./
         with:
-          working-directory: ./tests
-          subject: PSModule
+          WorkflowID: CI.yml
+          ArtifactName: Docs
+          GITHUB_TOKEN: ${{ GITHUB.TOKEN }}
