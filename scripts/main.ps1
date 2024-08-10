@@ -12,9 +12,7 @@ param(
 if ($WorkflowRunID) {
     Write-Output '::group::Verify Workflow Run'
     gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' "/repos/$env:GITHUB_REPOSITORY/actions/runs/$WorkflowRunID"
-    "RunID=$WorkflowRunID" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
     Write-Output '::endgroup::'
-    return
 } else {
     Write-Output '::group::Get PR'
     $PR = gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' `
@@ -32,5 +30,4 @@ if ($WorkflowRunID) {
 }
 
 Write-Output "Workflow Run ID: [$WorkflowRunID]"
-
 "RunID=$WorkflowRunID" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
