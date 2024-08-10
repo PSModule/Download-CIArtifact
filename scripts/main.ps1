@@ -18,6 +18,9 @@ if ($WorkflowRunID) {
     $PR = gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' `
         "/repos/$env:GITHUB_REPOSITORY/commits/$env:GITHUB_SHA/pulls" | ConvertFrom-Json
     $PR | ConvertTo-Json -Depth 100
+    if ($PR.Count -ne 1) {
+        throw "Expected 1 PR, but found $($PR.Count)."
+    }
     Write-Output '::endgroup::'
 
     Write-Output '::group::Get WorkflowRun'

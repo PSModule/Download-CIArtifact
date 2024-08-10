@@ -1,5 +1,5 @@
 name: Download-CIArtifact (by PSModule)
-description: Downloads an artifact from a CI workflow
+description: Downloads an artifact from a CI workflow.
 author: PSModule
 branding:
   icon: download-cloud
@@ -14,15 +14,15 @@ inputs:
     required: true
   WorkflowRunID:
     description: |
-      The ID of the workflow run to download the artifact from.
+      The ID of the workflow run where the artifact will be download from.
       This is to override the default behavior of getting the workflow run ID from the PR CI workflow.
     required: true
     default: ''
   ArtifactName:
-    description: The name of the artifact to download.
+    description: Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
     required: true
   GITHUB_TOKEN:
-    description: The GitHub token to use for authentication.
+    description: The GitHub token used to authenticate with the GitHub API.
     required: true
 
 runs:
