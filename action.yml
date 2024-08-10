@@ -16,7 +16,7 @@ inputs:
     description: |
       The ID of the workflow run where the artifact will be download from.
       This is to override the default behavior of getting the workflow run ID from the PR CI workflow.
-    required: true
+    required: false
     default: ''
   ArtifactName:
     description: Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.

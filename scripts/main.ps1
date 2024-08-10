@@ -19,7 +19,7 @@ if ($WorkflowRunID) {
         "/repos/$env:GITHUB_REPOSITORY/commits/$env:GITHUB_SHA/pulls" | ConvertFrom-Json
     $PR | ConvertTo-Json -Depth 100
     if ($PR.Count -ne 1) {
-        throw "Expected 1 PR, but found $($PR.Count)."
+        throw "Expected 1 PR, but found [$($PR.Count)]."
     }
     Write-Output '::endgroup::'
 
