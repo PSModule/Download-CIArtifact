@@ -1,27 +1,50 @@
-name: '{{ NAME }}'
-description: '{{ DESCRIPTION }}'
+name: Download-CIArtifact (by PSModule)
+description: Downloads an artifact from a CI workflow.
 author: PSModule
 branding:
-  icon: upload-cloud
+  icon: download-cloud
   color: white
 
 inputs:
-  working-directory:
-    description: The working directory where Terraform will be executed
+  WorkingDirectory:
+    description: The working directory where the artifact will be downloaded to. Default is the root of the repository.
     required: false
-  subject:
-    description: The subject to greet
+  WorkflowID:
+    description: The filename or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
-    default: World
+    default: ''
+  WorkflowRunID:
+    description: |
+      The ID of the workflow run where the artifact will be download from.
+      You must provide either `WorkflowID` or `WorkflowRunID`.
+    required: false
+    default: ''
+  ArtifactName:
+    description: Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+    required: true
+  GITHUB_TOKEN:
+    description: The GitHub token used to authenticate with the GitHub API.
+    required: true
 
 runs:
   using: composite
   steps:
-    - name: '{{ NAME }}'
+    - name: Get Workflow Run ID
+      id: workflow_run_id
       shell: pwsh
-      working-directory: ${{ inputs.working-directory }}
+      working-directory: ${{ inputs.WorkingDirectory }}
       env:
-        GITHUB_ACTION_INPUT_subject: ${{ inputs.subject }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        GITHUB_ACTION_INPUT_WorkflowID: ${{ inputs.WorkflowID }}
+        GITHUB_ACTION_INPUT_WorkflowRunID: ${{ inputs.WorkflowRunID }}
       run: |
-        # '{{ NAME }}'
+        # Download-CIArtifact
         . "$env:GITHUB_ACTION_PATH\scripts\main.ps1" -Verbose
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.ArtifactName }}
+        path: ${{ inputs.WorkingDirectory }}
+        github-token: ${{ github.token }}
+        run-id: ${{ steps.workflow_run_id.outputs.RunID }}

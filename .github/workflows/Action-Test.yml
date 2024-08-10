@@ -13,8 +13,23 @@ permissions:
   pull-requests: read
 
 jobs:
+  UploadArtifact:
+    name: Upload Artifact
+    runs-on: ubuntu-latest
+    steps:
+      # Need to check out as part of the test, as its a local action
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Docs
+          path: README.md
+
   ActionTestBasic:
     name: Action-Test - [Basic]
+    needs: UploadArtifact
     runs-on: ubuntu-latest
     steps:
       # Need to check out as part of the test, as its a local action
@@ -24,5 +39,6 @@ jobs:
       - name: Action-Test
         uses: ./
         with:
-          working-directory: ./tests
-          subject: PSModule
+          WorkflowRunID: ${{ github.run_id }}
+          ArtifactName: Docs
+          GITHUB_TOKEN: ${{ GITHUB.TOKEN }}
