@@ -10,12 +10,13 @@ inputs:
     description: The working directory where the artifact will be downloaded to. Default is the root of the repository.
     required: false
   WorkflowID:
-    description: The file name or ID of the workflow to download the artifact from.
-    required: true
+    description: The file name or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`.
+    required: false
+    default: ''
   WorkflowRunID:
     description: |
       The ID of the workflow run where the artifact will be download from.
-      This is to override the default behavior of getting the workflow run ID from the PR CI workflow.
+      You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
     default: ''
   ArtifactName:

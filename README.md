@@ -10,8 +10,8 @@ As an example, terraform plans can be uploaded as artifacts in a PR CI workflow 
 | Name | Description | Required | Default |
 | - | - | - | - |
 | `WorkingDirectory` | The working directory where the artifact will be downloaded to. Default is the root of the repository. | No |  |
-| `WorkflowID` | The file name or ID of the workflow to download the artifact from. | Yes |  |
-| `WorkflowRunID` | The ID of the workflow run where the artifact will be download from. This is to override the default behavior of getting the workflow run ID from the PR CI workflow. | No | '' |
+| `WorkflowID` | The file name or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`. | No | '' |
+| `WorkflowRunID` | The ID of the workflow run where the artifact will be download from. You must provide either `WorkflowID` or `WorkflowRunID`. | No | '' |
 | `ArtifactName` | Name of the artifact to download. If unspecified, all artifacts for the run are downloaded. | Yes |  |
 | `GITHUB_TOKEN` | The GitHub token used to authenticate with the GitHub API. | Yes |  |
 
