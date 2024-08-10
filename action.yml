@@ -47,4 +47,4 @@ runs:
         name: ${{ inputs.ArtifactName }}
         path: ${{ inputs.WorkingDirectory }}
         github-token: ${{ github.token }}
-        run-id:  ${{ steps.workflow_run_id.outputs.RunID }}
+        run-id: ${{ steps.workflow_run_id.outputs.RunID }}
