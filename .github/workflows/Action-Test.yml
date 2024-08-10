@@ -21,9 +21,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Docs
+          path: README.md
+
       - name: Action-Test
         uses: ./
         with:
-          WorkflowID: CI.yml
+          WorkflowRunID: ${{ github.run_id }}
           ArtifactName: Docs
           GITHUB_TOKEN: ${{ GITHUB.TOKEN }}
