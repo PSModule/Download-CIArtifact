@@ -2,11 +2,11 @@
 param(
     # The ID of the workflow to get the run for.
     [Parameter()]
-    [string] $WorkflowID = $env:GITHUB_ACTION_INPUT_WorkflowID,
+    [string] $WorkflowID = $env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_WorkflowID,
 
     # The ID of the workflow run to verify.
     [Parameter()]
-    [string] $WorkflowRunID = $env:GITHUB_ACTION_INPUT_WorkflowRunID
+    [string] $WorkflowRunID = $env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_WorkflowRunID
 )
 
 if ($WorkflowRunID) {
@@ -35,7 +35,7 @@ if ($WorkflowRunID) {
 Write-Output "Workflow Run ID: [$WorkflowRunID]"
 "RunID=$WorkflowRunID" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-$path = [string]::IsNullOrEmpty($env:PSMODULE_INVOKE_PESTER_INPUT_Path) ? '.' : $env:PSMODULE_INVOKE_PESTER_INPUT_Path |
+$path = [string]::IsNullOrEmpty($env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path) ? '.' : $env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path |
     Resolve-Path -Path $_ | Select-Object -ExpandProperty Path
 
 "Path=$path" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
