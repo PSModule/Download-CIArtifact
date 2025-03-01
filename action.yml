@@ -8,7 +8,8 @@ branding:
 inputs:
   Path:
     description: The path to the artifact to download.
-    required: true
+    required: false
+    default: '.'
   WorkflowID:
     description: The filename or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false

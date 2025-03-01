@@ -9,7 +9,7 @@ As an example, terraform plans can be uploaded as artifacts in a PR CI workflow 
 
 | Name | Description | Required | Default |
 | - | - | - | - |
-| `Path` | The path to the artifact to download. | Yes |  |
+| `Path` | The path to the artifact to download. | No | `'.'` |
 | `WorkflowID` | The filename or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`. | No | '' |
 | `WorkflowRunID` | The ID of the workflow run where the artifact will be download from. You must provide either `WorkflowID` or `WorkflowRunID`. | No | '' |
 | `ArtifactName` | Name of the artifact to download. If unspecified, all artifacts for the run are downloaded. | Yes |  |
