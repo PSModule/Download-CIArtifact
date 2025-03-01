@@ -9,7 +9,6 @@ inputs:
   Path:
     description: The path to the artifact to download.
     required: false
-    default: '.'
   WorkflowID:
     description: The filename or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
@@ -39,8 +38,9 @@ runs:
       working-directory: ${{ inputs.WorkingDirectory }}
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-        GITHUB_ACTION_INPUT_WorkflowID: ${{ inputs.WorkflowID }}
-        GITHUB_ACTION_INPUT_WorkflowRunID: ${{ inputs.WorkflowRunID }}
+        PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path: ${{ inputs.Path }}
+        PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_WorkflowID: ${{ inputs.WorkflowID }}
+        PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_WorkflowRunID: ${{ inputs.WorkflowRunID }}
       run: |
         # Download-CIArtifact
         ${{ github.action_path }}/scripts/main.ps1
@@ -49,6 +49,6 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.ArtifactName }}
-        path: ${{ inputs.WorkingDirectory }}/${{ inputs.Path }}
+        path: ${{ steps.workflow_run_id.outputs.Path }}
         github-token: ${{ github.token }}
         run-id: ${{ steps.workflow_run_id.outputs.RunID }}
