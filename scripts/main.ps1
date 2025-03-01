@@ -35,7 +35,7 @@ if ($WorkflowRunID) {
 Write-Output "Workflow Run ID: [$WorkflowRunID]"
 "RunID=$WorkflowRunID" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-$path = [string]::IsNullOrEmpty($env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path) ? '.' : $env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path |
-    Resolve-Path -Path $_ | Select-Object -ExpandProperty Path
+$path = [string]::IsNullOrEmpty($env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path) ? '.' : $env:PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_Path
+$path = Resolve-Path -Path $path | Select-Object -ExpandProperty Path
 
 "Path=$path" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
