@@ -6,9 +6,9 @@ branding:
   color: white
 
 inputs:
-  WorkingDirectory:
-    description: The working directory where the artifact will be downloaded to. Default is the root of the repository.
-    required: false
+  Path:
+    description: The path to the artifact to download.
+    required: true
   WorkflowID:
     description: The filename or ID of the workflow to download the artifact from. You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
@@ -25,6 +25,9 @@ inputs:
   GITHUB_TOKEN:
     description: The GitHub token used to authenticate with the GitHub API.
     required: true
+  WorkingDirectory:
+    description: The working directory where the artifact will be downloaded to. Default is the root of the repository.
+    required: false
 
 runs:
   using: composite
@@ -39,12 +42,12 @@ runs:
         GITHUB_ACTION_INPUT_WorkflowRunID: ${{ inputs.WorkflowRunID }}
       run: |
         # Download-CIArtifact
-        ${{ github.action_path }}\scripts\main.ps1
+        ${{ github.action_path }}/scripts/main.ps1
 
     - name: Download Artifact
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.ArtifactName }}
-        path: ${{ inputs.WorkingDirectory }}
+        path: ${{ inputs.WorkingDirectory }}/${{ inputs.Path }}
         github-token: ${{ github.token }}
         run-id: ${{ steps.workflow_run_id.outputs.RunID }}
