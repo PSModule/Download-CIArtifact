@@ -46,7 +46,7 @@ runs:
         ${{ github.action_path }}/scripts/main.ps1
 
     - name: Download Artifact
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: ${{ inputs.ArtifactName }}
         path: ${{ steps.workflow_run_id.outputs.Path }}
