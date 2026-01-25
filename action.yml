@@ -15,7 +15,7 @@ inputs:
     default: ''
   WorkflowRunID:
     description: |
-      The ID of the workflow run where the artifact will be download from.
+      The ID of the workflow run where the artifact will be downloaded from.
       You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
     default: ''
