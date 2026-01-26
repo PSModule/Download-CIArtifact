@@ -15,7 +15,7 @@ inputs:
     default: ''
   WorkflowRunID:
     description: |
-      The ID of the workflow run where the artifact will be download from.
+      The ID of the workflow run where the artifact will be downloaded from.
       You must provide either `WorkflowID` or `WorkflowRunID`.
     required: false
     default: ''
@@ -43,10 +43,10 @@ runs:
         PSMODULE_DOWNLOAD_CIARTIFACT_INPUT_WorkflowRunID: ${{ inputs.WorkflowRunID }}
       run: |
         # Download-CIArtifact
-        ${{ github.action_path }}/scripts/main.ps1
+        ${{ github.action_path }}/src/main.ps1
 
     - name: Download Artifact
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
         name: ${{ inputs.ArtifactName }}
         path: ${{ steps.workflow_run_id.outputs.Path }}
